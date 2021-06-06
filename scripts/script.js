@@ -42,15 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function getRandomString(length) {
+  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = '';
+  for ( var i = 0; i < length; i++ ) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+  }
+  return result;
+}
+
+var rand = getRandomString(36);
 // Instantiate the SDK. CDN will expose splitio globally 
 var factory = splitio({ 
   core: {
-    authorizationKey: 'YOUR_API_KEY',
+    authorizationKey: 'kgbi1ccdefqdlesdpdfreub73j8mfd80pj0t',
     // your internal user id, or the account id that 
     // the user belongs to. 
     // This coudld also be a cookie you generate
     // for anonymous users
-    key: 'kgbi1ccdefqdlesdpdfreub73j8mfd80pj0t',//prod client side
+    key: rand,//prod client side
     // an OPTIONAL traffic type, if provided will be
     // used for event tracking with the SDK client.
     trafficType: 'A_TRAFFIC_TYPE'
@@ -73,7 +83,7 @@ client.on(client.Event.SDK_READY, function() {
     permissions: ["read", "write"]
   };
   
-  var treatment = client.getTreatment('SPLIT_NAME', attributes);
+  var treatment = client.getTreatment('doubleColumn', attributes);
   if (treatment == "on") {
       // insert code here to show on treatment
       var v = document.getElementsByTagName('main')[0]
